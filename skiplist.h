@@ -1,8 +1,8 @@
 #pragma once
 
+#include "iterator.h"
 #include <stddef.h>
 #include <random>
-#include <iterator>
 #include <cmath>
 
 // T: element type (must implement comparisons and be copyable, must have a default constructor)
@@ -21,6 +21,8 @@ class SkipList {
     size_t layers;
     Node *next[L] = {};
   };
+
+  using Iterator = LinkedListIterator<T, Node>;
 public:
   // p: probability that element in layer k is in layer k+1 (0 <= P <= 1)
   SkipList(double p = 0.5) : head(0), tail(L), gd(p) {
@@ -30,32 +32,6 @@ public:
   ~SkipList() {
     clear();
   }
-
-  struct Iterator {
-    using iterator_category = std::forward_iterator_tag;
-    using value_type = T;
-    using difference_type = std::ptrdiff_t;
-    using pointer = T *;
-    using reference = T&;
-    Iterator(Node *node) : node(node) {}
-
-    reference operator*() { return **node; }
-    pointer operator->() { return *node; }
-    bool operator==(const Iterator &other) const { return node == other.node; }
-    bool operator!=(const Iterator &other) const { return node != other.node; }
-    
-    Iterator &operator++() {
-      node = node->next[0];
-      return *this;
-    }
-
-    Iterator &operator++(int) {
-      node = node->next[0];
-      return *this;
-    }
-  private:
-    Node *node;
-  };
 
   Iterator begin() { return Iterator(head.next[0]); }
   Iterator end() { return Iterator(&tail); }
