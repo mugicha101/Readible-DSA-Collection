@@ -3,6 +3,7 @@
 #include <iterator>
 
 // Iterator templates to improve the readibility of collections
+
 // T: element type
 // P: pointer class (has * and -> overloaded like a pointer)
 template<class T, class P>
