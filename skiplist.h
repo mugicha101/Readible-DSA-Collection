@@ -6,9 +6,11 @@
 #include <cmath>
 
 // T: element type (must implement comparisons and be copyable, must have a default constructor)
-// L: max levels (L > 0)
+// L: max levels (L >= 1)
 template<class T = int, size_t L = 12>
 class SkipList {
+  static_assert(L >= 1);
+
   struct Node {
     Node(size_t layers, T value) : layers(layers), value(value) {}
     Node(size_t layers) : layers(layers) {}

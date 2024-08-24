@@ -100,7 +100,7 @@ public:
 
   // construct new Vec from components
   template<class... Args>
-  Vec<T, sizeof...(Args)> get(Args... fmt) {
+  Vec<T, sizeof...(Args)> operator()(Args... fmt) {
     Vec<T, sizeof...(fmt)> res;
     size_t i = 0;
     for (size_t j : std::initializer_list<std::common_type_t<Args...>>{fmt...}) {

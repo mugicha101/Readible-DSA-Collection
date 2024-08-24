@@ -31,6 +31,8 @@ int main(int argc, char *argv[]) {
   vec3 = vec1.norm();
   print(vec3);
   std::cout << vec1.mag() << std::endl;
+  auto vec4 = vec1(0,0,0,1,1,1);
+  print(vec4);
 
   SkipList<int, 10> sl;
   print(sl);
