@@ -1,9 +1,11 @@
 #pragma once
 
 #include <iterator>
+#include <vector>
 
 // Iterator templates to improve the readibility of collections
 
+// iterator wrapping a linked-list type collection
 // T: element type
 // P: pointer class (has * and -> overloaded like a pointer)
 template<class T, class P>
@@ -29,7 +31,7 @@ private:
   P *ptr;
 };
 
-
+// iterator wrapping a fixed-memory array
 // T: element type
 template<class T>
 struct ArrayIterator {

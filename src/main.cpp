@@ -1,5 +1,5 @@
-#include "skiplist.h"
-#include "vec.h"
+#include "ordered_containers/skiplist.h"
+#include "geometry/vec.h"
 #include <iostream>
 
 #define print(container) std::cout << "size " << container.size() << ": "; for (auto x : container) std::cout << x << " "; std::cout << std::endl

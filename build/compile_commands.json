@@ -1,0 +1,14 @@
+[
+{
+  "directory": "C:/Users/alexa/Documents/COMP750/code/build",
+  "command": "C:\\msys64\\mingw64\\bin\\c++.exe -D_USE_MATH_DEFINES  -std=gnu++20 -lncurses -DNCURSES_STATIC -o CMakeFiles\\app.dir\\src\\geometry\\intersection.cpp.obj -c C:\\Users\\alexa\\Documents\\COMP750\\code\\src\\geometry\\intersection.cpp",
+  "file": "C:/Users/alexa/Documents/COMP750/code/src/geometry/intersection.cpp",
+  "output": "CMakeFiles/app.dir/src/geometry/intersection.cpp.obj"
+},
+{
+  "directory": "C:/Users/alexa/Documents/COMP750/code/build",
+  "command": "C:\\msys64\\mingw64\\bin\\c++.exe -D_USE_MATH_DEFINES  -std=gnu++20 -lncurses -DNCURSES_STATIC -o CMakeFiles\\app.dir\\src\\main.cpp.obj -c C:\\Users\\alexa\\Documents\\COMP750\\code\\src\\main.cpp",
+  "file": "C:/Users/alexa/Documents/COMP750/code/src/main.cpp",
+  "output": "CMakeFiles/app.dir/src/main.cpp.obj"
+}
+]

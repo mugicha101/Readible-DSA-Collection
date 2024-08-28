@@ -1,15 +1,18 @@
 #pragma once
 
-#include "iterator.h"
+#include "../util/iterator.h"
 #include <stddef.h>
 #include <cstring>
 #include <cmath>
+#include <cstdint>
+
+using dim_t = uint8_t;
 
 // Vec - represents an mathematical vector
 
 // T: numerical type (int, float, etc.)
 // D: number of dimensions (D >= 1)
-template <class T, size_t D>
+template <class T, dim_t D>
 class Vec {
   static_assert(D >= 1);
 
@@ -98,6 +101,14 @@ public:
     return (this->dot(other) / mag_sqd()) * *this;
   }
 
+  // rotation
+  constexpr T angle() const {
+    static_assert(D == 2);
+    return std::atan2(p[1], p[0]);
+  }
+
+  // TODO: Quaternions (when those are implemented)
+
   // construct new Vec from components
   template<class... Args>
   Vec<T, sizeof...(Args)> operator()(Args... fmt) {
@@ -115,33 +126,33 @@ public:
 };
 
 // operators
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> operator*(Vec<T, D> lhs, Vec<T, D> rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] *= rhs[i];
   }
   return lhs;
 }
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> operator*(Vec<T, D> lhs, T rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] *= rhs;
   }
   return lhs;
 }
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> operator*(T lhs, Vec<T, D> rhs) {
   return rhs * lhs;
 }
 
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> operator/(Vec<T, D> lhs, Vec<T, D> rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] /= rhs[i];
   }
   return lhs;
 }
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> operator/(Vec<T, D> lhs, T rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] /= rhs;
@@ -149,7 +160,7 @@ constexpr Vec<T, D> operator/(Vec<T, D> lhs, T rhs) {
   return lhs;
 }
 
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> operator+(Vec<T, D> lhs, Vec<T, D> rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] += rhs[i];
@@ -157,14 +168,14 @@ constexpr Vec<T, D> operator+(Vec<T, D> lhs, Vec<T, D> rhs) {
   return lhs;
 }
 
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> operator-(Vec<T, D> v) {
   for (size_t i = 0; i < D; ++i) {
     v[i] = -v[i];
   }
   return v;
 }
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> operator-(Vec<T, D> lhs, Vec<T, D> rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] -= rhs[i];
@@ -172,14 +183,14 @@ constexpr Vec<T, D> operator-(Vec<T, D> lhs, Vec<T, D> rhs) {
   return lhs;
 }
 
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> &operator*=(Vec<T, D> &lhs, Vec<T, D> rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] *= rhs[i];
   }
   return lhs;
 }
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> &operator*=(Vec<T, D> &lhs, T rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] *= rhs;
@@ -187,14 +198,14 @@ constexpr Vec<T, D> &operator*=(Vec<T, D> &lhs, T rhs) {
   return lhs;
 }
 
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> &operator/=(Vec<T, D> &lhs, Vec<T, D> rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] /= rhs[i];
   }
   return lhs;
 }
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> &operator/=(Vec<T, D> &lhs, T rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] /= rhs;
@@ -202,14 +213,14 @@ constexpr Vec<T, D> &operator/=(Vec<T, D> &lhs, T rhs) {
   return lhs;
 }
 
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> &operator+=(Vec<T, D> &lhs, Vec<T, D> rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] += rhs[i];
   }
   return lhs;
 }
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> &operator+=(Vec<T, D> &lhs, T rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] += rhs;
@@ -217,14 +228,14 @@ constexpr Vec<T, D> &operator+=(Vec<T, D> &lhs, T rhs) {
   return lhs;
 }
 
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> &operator-=(Vec<T, D> &lhs, Vec<T, D> rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] -= rhs[i];
   }
   return lhs;
 }
-template<class T, size_t D>
+template<class T, dim_t D>
 constexpr Vec<T, D> &operator-=(Vec<T, D> &lhs, T rhs) {
   for (size_t i = 0; i < D; ++i) {
     lhs[i] -= rhs;
@@ -233,12 +244,18 @@ constexpr Vec<T, D> &operator-=(Vec<T, D> &lhs, T rhs) {
 }
 
 // shorthands
-using Vec2i = Vec<int, 2>;
-using Vec2f = Vec<float, 2>;
-using Vec2d = Vec<double, 2>;
-using Vec3i = Vec<int, 3>;
-using Vec3f = Vec<float, 3>;
-using Vec3d = Vec<double, 3>;
-using Vec4i = Vec<int, 4>;
-using Vec4f = Vec<float, 4>;
-using Vec4d = Vec<double, 4>;
+template<class T>
+using Vec2 = Vec<T, 2>;
+template<class T>
+using Vec3 = Vec<T, 3>;
+template<class T>
+using Vec4 = Vec<T, 4>;
+using Vec2i = Vec2<int>;
+using Vec2f = Vec2<float>;
+using Vec2d = Vec2<double>;
+using Vec3i = Vec3<int>;
+using Vec3f = Vec3<float>;
+using Vec3d = Vec3<double>;
+using Vec4i = Vec4<int>;
+using Vec4f = Vec4<float>;
+using Vec4d = Vec4<double>;

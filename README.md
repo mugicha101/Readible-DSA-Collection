@@ -1,8 +1,8 @@
 ## About
 
-Collection of various data structures and algorithms not found in the C++ standard library. \
-Mostly intended to provide readible implementations without sacrificing basic useability and performance. \
+Collection of various templated data structures and algorithms not found in the C++ standard library. \
+Provides readible implementations with basic useability and performance.
 
-## Collection (WIP)
+## Collection
 
-- skip list
+- Skip List
